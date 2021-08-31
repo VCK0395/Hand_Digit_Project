@@ -8,7 +8,6 @@ from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Flatten, Dense
 
 # Load the Dataset
-minst = mnist
 (X_train, y_train), (X_test, y_test) = minst.load_data()
 
 # Preparing the Model
@@ -23,21 +22,17 @@ model.add(Dense(128, activation='relu'))
 model.add(Dense(10, activation='softmax'))
 
 model.compile(loss="sparse_categorical_crossentropy", optimizer="adam", metrics=["accuracy"])
-model.fit(X_train, y_train, epochs=3)
+model.fit(X_train, y_train, epochs=5)
 
-loss, accuracy = model.evaluate(X_test, y_test)
+accuracy = model.evaluate(X_test, y_test)
 
 print(accuracy)
-print(loss)
 
-model.save('Hand_Digits.model')
-
-
-# Test predicting of the Model
+# Testing the predictions of the Model
 for x in range(1, 6):
     img = cv2.imread(f'{x}.png')[:,:,0]
     img = np.invert(np.array([img]))
     prediction = model.predict(img)
-    print(f' the result is probably :  {np.argmax(prediction)}')
+    print(f' The number should be :  {np.argmax(prediction)}')
     plt.imshow(img[0], cmap=plt.cm.binary)
     plt.show()
