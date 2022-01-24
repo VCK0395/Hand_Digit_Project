@@ -28,11 +28,3 @@ accuracy = model.evaluate(X_test, y_test)
 
 print(accuracy)
 
-# Testing the predictions of the Model
-for x in range(1, 6):
-    img = cv2.imread(f'{x}.png')[:,:,0]
-    img = np.invert(np.array([img]))
-    prediction = model.predict(img)
-    print(f' The number should be :  {np.argmax(prediction)}')
-    plt.imshow(img[0], cmap=plt.cm.binary)
-    plt.show()
