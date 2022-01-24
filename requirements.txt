@@ -1,5 +1,4 @@
-pandas
-sklearn
-matplotlib
-seaborn
+cv2
 numpy
+matplotlib
+tensorflow
